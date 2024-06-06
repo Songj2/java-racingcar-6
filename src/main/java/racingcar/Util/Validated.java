@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Validated {
+    private static final int NAME_MAX_SIZE=5;
     //    IllegalArgumentException
     public void validate(boolean status) {
         if (status) {
@@ -19,7 +20,7 @@ public class Validated {
     //        5자 이하
     public boolean checkNameSize(String[] carName) {
         for (String name : carName) {
-            if (name.length() > 5) {
+            if (name.length() > NAME_MAX_SIZE) {
                 return false;
             }
         }

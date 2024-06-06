@@ -7,9 +7,10 @@ public class ParseTo {
     }
     //    전진 횟수 변환
     public String parseToHyphen(int count){
+        Messages messages= new Messages();
         String dash="";
         for (int i= 0; i<count;i++){
-            dash+="-";
+            dash+=messages.GO;
         }
         return dash;
     }

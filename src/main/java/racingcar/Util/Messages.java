@@ -5,6 +5,6 @@ public class Messages {
     public final String INPUT_COUNT="시도할 회수는 몇회인가요?";
 
     public final String RACE_START="실행 결과";
-
+    public final String GO="-";
     public final String FINAL_WINNER="최종 우승자 : ";
 }
