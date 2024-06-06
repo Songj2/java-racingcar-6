@@ -4,9 +4,9 @@ public class Car {
     private String name;
     private int onGoing;
 
-    public Car(){}
     public Car(String name){
         this.name= name;
+        setOnGoing(0);
     }
 
     public void setName(String name) {
