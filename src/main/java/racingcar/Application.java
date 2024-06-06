@@ -20,6 +20,7 @@ public class Application {
         validate(!checkInteger(userNumber));
         int count = parseToInteger(userNumber);
         ArrayList<Car> result= runRace(carName, count);
+        printWinner(result);
     }
 
     //        사용자에게 자동차 이름 입력받기
@@ -108,7 +109,7 @@ public class Application {
     }
 //        출력 _이름:
     private static void printRoundResult(Car car){
-        System.out.printf("%s: %s\n", car.getName(), parseToHyphen(car.getOnGoing()));
+        System.out.printf("%s : %s\n", car.getName(), parseToHyphen(car.getOnGoing()));
     }
 //    전진 횟수 변환
     private static String parseToHyphen(int count){
@@ -119,4 +120,51 @@ public class Application {
         return dash;
     }
 //        경기 종료후 우승자 발표 (중복 가능)
+    private static void printWinner(ArrayList<Car> cars){
+        ArrayList<String> winner= whoIsWinner(cars);
+        String theWinner="최종 우승자 : ";
+        if (winner.size()>1){
+            theWinner+= stringWinners(winner);
+        }else {
+            theWinner+= stringWinner(winner);
+        }
+        System.out.println(theWinner);
+    }
+//    출력 양식
+    private static String stringWinner(ArrayList<String> winner){
+        return winner.get(0);
+
+    }
+    private static String stringWinners(ArrayList<String> winner){
+        String names="";
+        for (int i=0; i<winner.size();i++){
+            names+= winner.get(i);
+            if (i<winner.size()-1){
+                names+= ", ";
+            }
+        }
+        return names;
+    }
+//    우승자 선정
+    private static ArrayList<String> whoIsWinner(ArrayList<Car> cars){
+        ArrayList<String> winner= new ArrayList<>();
+        int farDistance= farDistance(cars);
+        for (Car car: cars){
+            if (car.getOnGoing()==farDistance){
+                winner.add(car.getName());
+            }
+        }
+        return winner;
+    }
+
+//    가장 멀리간 거리
+    private static int farDistance(ArrayList<Car> cars){
+        int maxNumber= -1;
+        for (Car car: cars){
+            if (car.getOnGoing()>maxNumber){
+                maxNumber= car.getOnGoing();
+            }
+        }
+        return maxNumber;
+    }
 }
