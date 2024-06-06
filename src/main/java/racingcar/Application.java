@@ -1,6 +1,7 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.Model.Car;
 
 import javax.swing.plaf.IconUIResource;
@@ -19,6 +20,7 @@ public class Application {
         String userNumber = inputCount();
         validate(!checkInteger(userNumber));
         int count = parseToInteger(userNumber);
+        runRace(carName, count);
     }
 
     //        사용자에게 자동차 이름 입력받기
@@ -75,8 +77,34 @@ public class Application {
         return list;
     }
 //        게임시행
+    private static ArrayList<Car> runRace(String[] carName, int count){
+        ArrayList<Car> list= makeCarList(carName);
+        while (count>0){
+            list= roundResult(list);
+            count--;
+        }
+        return list;
+    }
+//    전진 판정
+    private static ArrayList<Car> roundResult(ArrayList<Car> cars){
+        for (Car car: cars){
+            if (checkGoOption(pickRandomNumber())){
+                car.setOnGoing(car.getOnGoing()+1);
+            }
+        }
+        return cars;
+    }
 //        랜덤값 뽑기
+    private static int pickRandomNumber(){
+        return Randoms.pickNumberInRange(0, 9);
+    }
 //        전진 조건 확인 _>=4
+    private static boolean checkGoOption(int randomNumber){
+        if (randomNumber>=4){
+            return true;
+        }
+        return false;
+    }
 //        출력 _이름:
 //        경기 종료후 우승자 발표 (중복 가능)
 }
