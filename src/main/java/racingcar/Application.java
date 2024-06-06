@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.Model.Car;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Application {
         String userNumber = inputCount();
         validate(!checkInteger(userNumber));
         int count = parseToInteger(userNumber);
-        runRace(carName, count);
+        ArrayList<Car> result= runRace(carName, count);
     }
 
     //        사용자에게 자동차 이름 입력받기
@@ -82,6 +81,7 @@ public class Application {
         while (count>0){
             list= roundResult(list);
             count--;
+            System.out.println();
         }
         return list;
     }
@@ -91,6 +91,7 @@ public class Application {
             if (checkGoOption(pickRandomNumber())){
                 car.setOnGoing(car.getOnGoing()+1);
             }
+            printRoundResult(car);
         }
         return cars;
     }
@@ -106,5 +107,16 @@ public class Application {
         return false;
     }
 //        출력 _이름:
+    private static void printRoundResult(Car car){
+        System.out.printf("%s: %s\n", car.getName(), parseToHyphen(car.getOnGoing()));
+    }
+//    전진 횟수 변환
+    private static String parseToHyphen(int count){
+        String dash="";
+        for (int i= 0; i<count;i++){
+            dash+="-";
+        }
+        return dash;
+    }
 //        경기 종료후 우승자 발표 (중복 가능)
 }
