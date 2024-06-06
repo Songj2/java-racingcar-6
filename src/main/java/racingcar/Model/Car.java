@@ -5,6 +5,9 @@ public class Car {
     private int onGoing;
 
     public Car(){}
+    public Car(String name){
+        this.name= name;
+    }
 
     public void setName(String name) {
         this.name = name;
